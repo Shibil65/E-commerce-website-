@@ -16,7 +16,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/products/${id}`
+          `https://e-commerce-website-kidoza-8162.onrender.com/api/products/${id}`
         );
 
         if (!res.ok) {

@@ -30,7 +30,7 @@ const Register = () => {
       setLoading(true);
 
       const res = await fetch(
-        'http://localhost:5000/api/auth/register',
+        'https://e-commerce-website-kidoza-8162.onrender.com/api/auth/register',
         {
           method: 'POST',
           headers: {

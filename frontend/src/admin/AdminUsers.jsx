@@ -19,7 +19,7 @@ const AdminUsers = () => {
     const fetchUsers = async () => {
       try {
         const res = await fetch(
-          'http://localhost:5000/api/auth/users',
+          'https://e-commerce-website-kidoza-8162.onrender.com/api/auth/users',
           {
             headers: {
               Authorization:

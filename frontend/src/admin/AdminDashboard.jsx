@@ -16,7 +16,7 @@ const AdminDashboard = () => {
     const fetchStats = async () => {
       try {
         const res = await fetch(
-          'http://localhost:5000/api/analytics',
+          'https://e-commerce-website-kidoza-8162.onrender.com/api/analytics',
           {
             headers: {
               Authorization: `Bearer ${user.token}`
