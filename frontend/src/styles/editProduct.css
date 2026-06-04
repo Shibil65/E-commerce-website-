@@ -1,0 +1,180 @@
+.edit-page{
+  max-width:1400px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.edit-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:28px;
+  padding:35px;
+  box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.edit-header{
+  margin-bottom:30px;
+}
+
+.edit-header h1{
+  font-size:2.5rem;
+  color:#111827;
+  margin-bottom:10px;
+}
+
+.edit-header p{
+  color:#6b7280;
+}
+
+.edit-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:30px;
+}
+
+.edit-form{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.edit-form input,
+.edit-form textarea{
+  width:100%;
+  padding:15px 18px;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  font-size:15px;
+  background:#fff;
+  color:#111827;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus{
+  outline:none;
+  border-color:#ff6b35;
+  box-shadow:
+  0 0 0 4px
+  rgba(255,107,53,.15);
+}
+
+.upload-box{
+  padding:20px;
+  border:2px dashed #ff6b35;
+  border-radius:16px;
+  background:#fff7f3;
+}
+
+.upload-box label{
+  display:block;
+  margin-bottom:10px;
+  font-weight:600;
+  color:#ff6b35;
+}
+
+.update-btn{
+  border:none;
+  cursor:pointer;
+  padding:16px;
+  border-radius:16px;
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+
+  background:
+  linear-gradient(
+  135deg,
+  #ff6b35,
+  #ff8c42
+  );
+
+  transition:.3s;
+}
+
+.update-btn:hover{
+  transform:translateY(-3px);
+}
+
+.preview-card{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:
+  0 15px 35px rgba(0,0,0,.06);
+}
+
+.preview-image{
+  height:350px;
+  background:#f8fafc;
+}
+
+.preview-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.placeholder{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#94a3b8;
+}
+
+.preview-content{
+  padding:25px;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:50px;
+
+  background:
+  rgba(255,107,53,.12);
+
+  color:#ff6b35;
+  font-size:13px;
+  font-weight:700;
+}
+
+.preview-content h2{
+  margin-top:15px;
+  color:#111827;
+}
+
+.preview-price{
+  font-size:2rem;
+  font-weight:800;
+  color:#ff6b35;
+  margin:15px 0;
+}
+
+.preview-content p{
+  color:#6b7280;
+  line-height:1.8;
+}
+
+.stock-badge{
+  margin-top:20px;
+  display:inline-block;
+  background:#ecfdf5;
+  color:#10b981;
+  padding:10px 16px;
+  border-radius:30px;
+  font-weight:700;
+}
+
+@media(max-width:900px){
+
+  .edit-grid{
+    grid-template-columns:1fr;
+  }
+
+  .preview-image{
+    height:280px;
+  }
+
+}
