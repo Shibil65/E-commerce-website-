@@ -12,7 +12,9 @@ const app = express();
 // Set CORS for frontend URL / allow single-node deploy
 app.use(cors({
   origin: [
-    "http://localhost:3000",  
+    "http://localhost:3000", 
+    "https://e-commerce-website-1-rdg5.onrender.com",
+    
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
