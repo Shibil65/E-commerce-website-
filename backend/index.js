@@ -9,11 +9,10 @@ connectDB();
 
 const app = express();
 
-// Set CORS for frontend URL / allow single-node deploy
+/* ---------------- CORS ---------------- */
 app.use(cors({
   origin: [
     "http://localhost:3000",
-    "https://e-commerce-website-1-rdg5.onrender.com",
     "https://e-commerce-website-pmkv.vercel.app"
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -21,20 +20,21 @@ app.use(cors({
   credentials: true
 }));
 
-// IMPORTANT for preflight
-app.options("*", cors());
+/* IMPORTANT: handle preflight automatically */
+app.use(express.json());
 
+/* ---------------- ROUTES ---------------- */
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/payment', require('./routes/paymentRoutes'));
 app.use('/api/analytics', require('./routes/analyticsRoutes'));
 
-// Serve frontend in production
+/* ---------------- PRODUCTION FRONTEND ---------------- */
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-  app.use((req, res) => {
+  app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
   });
 } else {
@@ -43,5 +43,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+/* ---------------- SERVER ---------------- */
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
