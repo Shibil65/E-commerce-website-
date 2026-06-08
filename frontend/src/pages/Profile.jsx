@@ -30,7 +30,7 @@ const Profile = () => {
         try {
           const res =
             await fetch(
-              'https://e-commerce-website-kidoza-8162.onrender.com/api/orders/myorders',
+              'https://e-commerce-website-78kn.onrender.com/api/orders/myorders',
               {
                 headers: {
                   Authorization:

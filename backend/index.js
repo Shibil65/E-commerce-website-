@@ -11,8 +11,10 @@ const app = express();
 
 // Set CORS for frontend URL / allow single-node deploy
 app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  origin: [
+    "http://localhost:3000",  
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 

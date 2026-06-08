@@ -19,7 +19,7 @@ const VerifyOtp = () => {
 
       const res =
         await fetch(
-          'https://e-commerce-website-kidoza-8162.onrender.com/api/auth/verify-otp',
+          'https://e-commerce-website-78kn.onrender.com/api/auth/verify-otp',
           {
             method: 'POST',
             headers: {

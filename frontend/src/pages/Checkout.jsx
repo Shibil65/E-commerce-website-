@@ -19,7 +19,7 @@ const Checkout = () => {
 
   const handlePayment = async () => {
     try {
-      const orderRes = await fetch('https://e-commerce-website-kidoza-8162.onrender.com/api/payment/order', {
+      const orderRes = await fetch('https://e-commerce-website-78kn.onrender.com/api/payment/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: totalPrice })
@@ -45,14 +45,14 @@ const Checkout = () => {
         order_id: orderData.id,
 
         handler: async function (response) {
-          const verifyRes = await fetch('https://e-commerce-website-kidoza-8162.onrender.com/api/payment/verify', {
+          const verifyRes = await fetch('https://e-commerce-website-78kn.onrender.com/api/payment/verify', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(response)
           });
 
           if (verifyRes.ok) {
-            const saveOrderRes = await fetch('https://e-commerce-website-kidoza-8162.onrender.com/api/orders', {
+            const saveOrderRes = await fetch('https://e-commerce-website-78kn.onrender.com/api/orders', {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const Checkout = () => {
   };
 
   const bypassPayment = async () => {
-    const saveOrderRes = await fetch('https://e-commerce-website-kidoza-8162.onrender.com/api/orders', {
+    const saveOrderRes = await fetch('https://e-commerce-website-78kn.onrender.com/api/orders', {
       method: 'POST',
       headers: { 
         'Content-Type': 'application/json',

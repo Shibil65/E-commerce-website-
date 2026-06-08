@@ -59,7 +59,7 @@ const AddProduct = () => {
 
     try {
       const res = await fetch(
-        'https://e-commerce-website-kidoza-8162.onrender.com/api/products',
+        'https://e-commerce-website-78kn.onrender.com/api/products',
         {
           method: 'POST',
           headers: {
