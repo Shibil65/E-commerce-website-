@@ -12,15 +12,17 @@ const app = express();
 // Set CORS for frontend URL / allow single-node deploy
 app.use(cors({
   origin: [
-    "http://localhost:3000", 
+    "http://localhost:3000",
     "https://e-commerce-website-1-rdg5.onrender.com",
-    
+    "https://e-commerce-website-pmkv.vercel.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
 
-app.use(express.json());
+// IMPORTANT for preflight
+app.options("*", cors());
 
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/products', require('./routes/productRoutes'));
