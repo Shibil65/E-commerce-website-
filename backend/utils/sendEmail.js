@@ -1,84 +1,45 @@
-const express = require("express");
-const router = express.Router();
-const User = require("../models/User");
-const sendEmail = require("../utils/sendEmail");
-const bcrypt = require("bcryptjs");
+const nodemailer = require('nodemailer');
 
-router.post("/register", async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
-
-    if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
-
-    const existingUser = await User.findOne({ email });
-
-    if (existingUser) {
-      return res.status(400).json({
-        success: false,
-        message: "User already exists",
-      });
-    }
-
-    // ✅ hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // OTP as string (IMPORTANT)
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
-
-    const user = await User.create({
-      name,
-      email,
-      password: hashedPassword,
-      otp,
-      otpExpire: Date.now() + 10 * 60 * 1000,
-      isVerified: false,
-    });
-
-    console.log("User saved successfully");
-
-    try {
-      const info = await sendEmail({
-        email,
-        subject: "Verify Your Account",
-        message: `
-          <h2>Welcome to Kidoza</h2>
-          <p>Your OTP is:</p>
-          <h1>${otp}</h1>
-          <p>This OTP will expire in 10 minutes.</p>
-        `,
-      });
-
-      console.log("EMAIL INFO:", info);
-      console.log("OTP email sent successfully");
-    } catch (emailError) {
-      console.error("Email sending failed:", emailError);
-
-      // ❗ IMPORTANT: don't lie to frontend
-      return res.status(500).json({
-        success: false,
-        message: "Failed to send OTP email",
-      });
-    }
-
-    return res.status(201).json({
-      success: true,
-      message: "OTP sent successfully",
-      userId: user._id,
-    });
-
-  } catch (error) {
-    console.error("Register Error:", error);
-
-    return res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+const sendEmail = async ({ email, subject, message }) => {
+  if (!process.env.GMAIL_USER) {
+    throw new Error('GMAIL_USER is missing in .env');
   }
-});
 
-module.exports = router;
+  if (!process.env.GMAIL_PASS) {
+    throw new Error('GMAIL_PASS is missing in .env');
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS,
+    },
+
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+  try {
+    const info = await transporter.sendMail({
+      from: `"Kidoza Support" <${process.env.GMAIL_USER}>`,
+      to: email,
+      subject,
+      html: message,
+    });
+
+    console.log('Email sent successfully');
+    console.log('Message ID:', info.messageId);
+
+    return info;
+  } catch (error) {
+    console.error('Email Error:', error);
+    throw new Error(`Failed to send email: ${error.message}`);
+  }
+};
+
+module.exports = sendEmail;
