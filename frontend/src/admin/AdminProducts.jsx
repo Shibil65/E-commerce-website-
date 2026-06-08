@@ -15,7 +15,7 @@ const AdminProducts = () => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(
-          'https://e-commerce-website-kidoza-8162.onrender.com/api/products'
+          'https://e-commerce-website-1-rdg5.onrender.com/api/products'
         );
 
         const data = await res.json();
@@ -43,7 +43,7 @@ const AdminProducts = () => {
 
     try {
       const res = await fetch(
-        `https://e-commerce-website-78kn.onrender.com/api/products/${id}`,
+        `https://e-commerce-website-1-rdg5.onrender.com/api/products/${id}`,
         {
           method: 'DELETE',
           headers: {

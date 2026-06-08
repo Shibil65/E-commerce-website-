@@ -29,20 +29,20 @@ const Register = () => {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        'https://e-commerce-website-78kn.onrender.com/api/auth/register',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-          }),
-        }
-      );
+        const res = await fetch(
+          'https://e-commerce-website-1-rdg5.onrender.com/api/auth/register',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+            }),
+          }
+        );
 
       const data = await res.json();
 

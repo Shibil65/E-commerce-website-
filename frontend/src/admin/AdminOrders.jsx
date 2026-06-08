@@ -9,7 +9,7 @@ const AdminOrders = () => {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          'https://e-commerce-website-kidoza-8162.onrender.com/api/orders',
+          'https://e-commerce-website-1-rdg5.onrender.com/api/orders',
           {
             headers: {
               Authorization: `Bearer ${user.token}`
@@ -37,7 +37,7 @@ const AdminOrders = () => {
     status
   ) => {
     const res = await fetch(
-      `https://e-commerce-website-78kn.onrender.com/api/orders/${id}/status`,
+      `https://e-commerce-website-1-rdg5.onrender.com/api/orders/${id}/status`,
       {
         method: 'PUT',
         headers: {

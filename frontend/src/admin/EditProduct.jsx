@@ -39,7 +39,7 @@ const EditProduct = () => {
     const fetchProduct = async () => {
       try {
         const res = await fetch(
-          `https://e-commerce-website-78kn.onrender.com/api/products/${id}`
+          `https://e-commerce-website-1-rdg5.onrender.com/api/products/${id}`
         );
 
         const data =
@@ -123,7 +123,7 @@ const EditProduct = () => {
 
     try {
       const res = await fetch(
-        `https://e-commerce-website-78kn.onrender.com/api/products/${id}`,
+        `https://e-commerce-website-1-rdg5.onrender.com/api/products/${id}`,
         {
           method: 'PUT',
           headers: {

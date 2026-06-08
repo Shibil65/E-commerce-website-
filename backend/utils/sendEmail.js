@@ -1,45 +1,67 @@
-const nodemailer = require('nodemailer');
+const express = require("express");
+const router = express.Router();
+const User = require("../models/User");
+const sendEmail = require("../utils/sendEmail");
 
-const sendEmail = async ({ email, subject, message }) => {
-  if (!process.env.GMAIL_USER) {
-    throw new Error('GMAIL_USER is missing in .env');
-  }
-
-  if (!process.env.GMAIL_PASS) {
-    throw new Error('GMAIL_PASS is missing in .env');
-  }
-
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-    },
-
-    tls: {
-      rejectUnauthorized: false,
-    },
-  });
-
+router.post("/register", async (req, res) => {
   try {
-    const info = await transporter.sendMail({
-      from: `"ShopNest Support" <${process.env.GMAIL_USER}>`,
-      to: email,
-      subject,
-      html: message,
+    const { name, email, password } = req.body;
+
+    // Check existing user
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({
+        success: false,
+        message: "User already exists",
+      });
+    }
+
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000);
+
+    // Create user
+    const user = await User.create({
+      name,
+      email,
+      password,
+      otp,
+      isVerified: false,
     });
 
-    console.log('Email sent successfully');
-    console.log('Message ID:', info.messageId);
+    console.log("User saved successfully");
 
-    return info;
+    // Send OTP email
+    try {
+      await sendEmail({
+        email,
+        subject: "Verify Your Account",
+        message: `
+          <h2>Welcome to Kidoza</h2>
+          <p>Your OTP is:</p>
+          <h1>${otp}</h1>
+          <p>This OTP will expire shortly.</p>
+        `,
+      });
+
+      console.log("OTP email sent");
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+    }
+
+    return res.status(201).json({
+      success: true,
+      message: "Registration successful. Check your email for OTP.",
+      userId: user._id,
+    });
   } catch (error) {
-    console.error('Email Error:', error);
-    throw new Error(`Failed to send email: ${error.message}`);
-  }
-};
+    console.error("Register Error:", error);
 
-module.exports = sendEmail;
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+module.exports = router;

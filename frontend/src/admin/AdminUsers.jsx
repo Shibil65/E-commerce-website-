@@ -19,7 +19,7 @@ const AdminUsers = () => {
     const fetchUsers = async () => {
       try {
         const res = await fetch(
-          'https://e-commerce-website-78kn.onrender.com/api/auth/users',
+          'https://e-commerce-website-1-rdg5.onrender.com/api/auth/users',
           {
             headers: {
               Authorization:

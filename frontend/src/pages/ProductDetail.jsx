@@ -16,7 +16,7 @@ const ProductDetail = () => {
     const fetchProduct = async () => {
       try {
         const res = await fetch(
-          `https://e-commerce-website-78kn.onrender.com/api/products/${id}`
+          `https://e-commerce-website-1-rdg5.onrender.com/api/products/${id}`
         );
 
         if (!res.ok) {

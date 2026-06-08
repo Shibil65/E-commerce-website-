@@ -59,7 +59,7 @@ const AddProduct = () => {
 
     try {
       const res = await fetch(
-        'https://e-commerce-website-78kn.onrender.com/api/products',
+        'https://e-commerce-website-1-rdg5.onrender.com/api/products',
         {
           method: 'POST',
           headers: {
